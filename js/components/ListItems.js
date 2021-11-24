@@ -7,7 +7,7 @@ const ListItems = (list) => {
               <li key=${id} class="list-items" id="list-items-${id}">
                   <span class="list-item-text" id="list-item-text-${id}">${item}</span>
                   <div class="list-tools">
-                      <img src="./assets/edit.png" alt="Edit" class="edit-icon" >
+                      <img src="./assets/edit.png" alt="Edit" class="edit-icon" id="delete-icon-${id}">
                       <img src="./assets/trash.png" alt="Delete" class="delete-icon" id="delete-icon-${id}">
                   </div>
               </li>

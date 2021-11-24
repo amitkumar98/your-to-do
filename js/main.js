@@ -26,6 +26,21 @@ const findComponentByPath = (reqPath) => {
   return routes.find((r) => r.path === reqPath) || undefined;
 };
 
+const onAddItemClick = () => {
+  if (itemInputValue) {
+    var list = JSON.parse(localStorage.getItem("ToDoList"));
+    list.push(itemInputValue);
+    localStorage.setItem("ToDoList", JSON.stringify(list));
+    document.querySelector(".list").innerHTML = ListItems(list);
+    itemInputValue = null;
+    document.querySelector("#item-input").value = "";
+    document.querySelector(".item-empty-warning").textContent = "";
+  } else {
+    document.querySelector(".item-empty-warning").textContent = ItemWarningText;
+  }
+  window.location.reload();
+};
+
 const router = () => {
   // Find the component based on the current path
   let path = parseLocation();
@@ -77,22 +92,10 @@ const router = () => {
         localStorage.setItem("ToDoList", JSON.stringify([]));
       }
 
-      // Function to handle onclick event of add item button
-      document.querySelector(".add-button").onclick = function () {
-        if (itemInputValue) {
-          var list = JSON.parse(localStorage.getItem("ToDoList"));
-          list.push(itemInputValue);
-          localStorage.setItem("ToDoList", JSON.stringify(list));
-          document.querySelector(".list").innerHTML = ListItems(list);
-          itemInputValue = null;
-          document.querySelector("#item-input").value = "";
-          document.querySelector(".item-empty-warning").textContent = "";
-        } else {
-          document.querySelector(".item-empty-warning").textContent =
-            ItemWarningText;
-        }
-        window.location.reload();
-      };
+      // Event listener to handle onclick event of add item button
+      document
+        .querySelector(".add-button")
+        .addEventListener("click", onAddItemClick);
 
       // event listener to handle click event of list items
       var listItems = document.querySelectorAll(".list-item-text");
@@ -112,6 +115,19 @@ const router = () => {
           }
         });
       }
+
+      // event listener to handle click event of edit icon
+      //   var editIcons = document.querySelectorAll(".edit-icon");
+      //   console.log("Edit Icons: ", editIcons);
+      //   for (let editIcon of editIcons) {
+      //     editIcon.addEventListener("click", (event) => {
+      //       console.log("Event : ", event);
+      //       let index = event.target.id.split("-").at(-1);
+      //       console.log("Index: ", index);
+      // 	  let text = document.querySelector(`#list-item-text-${index}`);
+
+      //     });
+      //   }
 
       // event listener to handle click event of delete item button
       var deleteButtons = document.querySelectorAll(".delete-icon");
