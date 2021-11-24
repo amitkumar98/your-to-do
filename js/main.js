@@ -42,7 +42,7 @@ const onAddItemClick = () => {
 };
 
 const handleListItemClick = (event) => {
-  console.log("Event : ", event);
+  // console.log("Event : ", event);
   let index = event.target.id.split("-").at(-1);
   let text = document.querySelector(`#list-item-text-${index}`);
   if (text && event.target.localName === "span") {
@@ -120,12 +120,12 @@ const router = () => {
 
       // event listener to handle click event of edit icon
       var editIcons = document.querySelectorAll(".edit-icon");
-      console.log("Edit Icons: ", editIcons);
+      // console.log("Edit Icons: ", editIcons);
       for (let editIcon of editIcons) {
         editIcon.addEventListener("click", (event) => {
-          console.log("Event : ", event);
+          // console.log("Event : ", event);
           let index = event.target.id.split("-").at(-1);
-          console.log("Index: ", index);
+          // console.log("Index: ", index);
           let text = document.querySelector(`#list-item-text-${index}`);
           text.innerHTML = `<input type="text" class="edit-input-${index}" id="edit-input-${index}" value="${text.textContent}">`;
           let editInputField = document.querySelector(`#edit-input-${index}`);
